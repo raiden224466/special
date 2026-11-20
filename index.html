@@ -169,12 +169,12 @@
             line-height: 1.6;
         }
 
-        /* لمسة مميزة: بطاقة وصول سريع بنمط المنصة */
+        /* بطاقة وصول سريع بنمط المنصة */
         .quick-access-box {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 8px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .access-item {
@@ -198,12 +198,87 @@
             color: var(--text-muted);
         }
 
+        /* منطقة الزر المركزية البارزة */
+        .center-action-zone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 18px 0 20px;
+            padding: 14px 10px;
+            border-radius: 18px;
+            background: rgba(255, 85, 0, 0.05);
+            border: 1px solid rgba(255, 85, 0, 0.22);
+        }
+
+        .btn {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background: linear-gradient(135deg, var(--orange-light), var(--orange-main) 50%, var(--orange-deep));
+            color: var(--text-white);
+            text-decoration: none;
+            padding: 16px 22px;
+            border-radius: 15px;
+            font-size: 17.5px;
+            font-weight: 900;
+            letter-spacing: 0.3px;
+            box-shadow: 0 8px 26px rgba(255, 85, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 160, 110, 0.35);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+
+        .btn svg {
+            width: 21px;
+            height: 21px;
+            fill: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+            transform: skewX(-20deg);
+            animation: shineSweep 3.2s infinite;
+        }
+
+        @keyframes shineSweep {
+            0%, 65% { left: -100%; }
+            100% { left: 160%; }
+        }
+
+        .btn:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 12px 30px rgba(255, 85, 0, 0.62);
+            filter: brightness(1.05);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.99);
+        }
+
+        .action-caption {
+            margin-top: 9px;
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }
+
         .steps-box {
             background: rgba(255, 255, 255, 0.025);
             border: 1px solid rgba(255, 255, 255, 0.07);
             border-radius: 14px;
             padding: 12px 14px;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
             text-align: right;
             font-size: 13px;
             color: #dcdcdc;
@@ -230,45 +305,8 @@
             flex-shrink: 0;
         }
 
-        .btn {
-            position: relative;
-            overflow: hidden;
-            display: block;
-            background: linear-gradient(135deg, var(--orange-main), var(--orange-deep));
-            color: var(--text-white);
-            text-decoration: none;
-            padding: 15px 22px;
-            border-radius: 14px;
-            font-size: 17px;
-            font-weight: 800;
-            box-shadow: 0 6px 22px rgba(255, 85, 0, 0.42);
-            transition: transform 0.2s ease, background 0.2s ease;
-        }
-
-        .btn::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-            transform: skewX(-20deg);
-            animation: shineSweep 3.2s infinite;
-        }
-
-        @keyframes shineSweep {
-            0%, 65% { left: -100%; }
-            100% { left: 160%; }
-        }
-
-        .btn:hover {
-            background: linear-gradient(135deg, var(--orange-light), var(--orange-main));
-            transform: translateY(-2px);
-        }
-
         .copy-helper {
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
         .copy-btn {
@@ -334,10 +372,80 @@
 
         <div class="badge"><span class="live-dot"></span>جاهز للدخول الفوري</div>
         <h1>ابدأ عبر البوت الرسمي الآن</h1>
-        <p>اضغط على زر تسجيل الدخول للانتقال المباشر إلى تليجرام وبدء الخطوات بدون تأخير.</p>
+        <p>اضغط على الزر في المنتصف للانتقال المباشر إلى تليجرام وبدء الخطوات بدون تأخير.</p>
 
         <!-- بطاقة وصول سريع -->
         <div class="quick-access-box">
             <div class="access-item">
                 <span class="access-title">دخول مباشر</span>
-                <span class
+                <span class="access-sub">تحويل فوري إلى تليجرام</span>
+            </div>
+            <div class="access-item">
+                <span class="access-title">حساب موثوق</span>
+                <span class="access-sub">متابعة سهلة وسريعة</span>
+            </div>
+        </div>
+
+        <!-- زر الدخول المركزي البارز -->
+        <div class="center-action-zone">
+            <a id="botLink"
+               href="https://telegram.me/SpecialOneTexasBot?start=7828300263"
+               class="btn"
+               onclick="return openTelegramBot(event, this.href);">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.89.03-.25.38-.51 1.05-.78 4.11-1.79 6.85-2.97 8.22-3.54 3.91-1.63 4.72-1.91 5.25-1.92.12 0 .39.03.56.17.14.12.18.28.2.45-.02.07-.02.13-.04.2z"/>
+                </svg>
+                <span>دخول إلى SPECIAL ONE TEXAS BOT</span>
+            </a>
+            <span class="action-caption">يفتح رابط الإحالة الرسمي مباشرة في تليجرام</span>
+        </div>
+
+        <!-- خطوات سريعة -->
+        <div class="steps-box">
+            <div class="step-item"><span class="step-num">1</span><span>اضغط على زر الدخول في المنتصف</span></div>
+            <div class="step-item"><span class="step-num">2</span><span>اضغط «ابدأ / Start» داخل البوت في تليجرام</span></div>
+            <div class="step-item"><span class="step-num">3</span><span>تابع خطواتك مباشرة داخل البوت</span></div>
+        </div>
+
+        <div class="copy-helper">
+            <button type="button" class="copy-btn" onclick="copyBotLink(this)">نسخ رابط البوت المباشر</button>
+        </div>
+
+        <div class="footer-text">
+            تحويل آمن ومباشر إلى تليجرام.<br>
+            جميع الحقوق محفوظة © SPECIAL ONE TEXAS BOT 2026
+        </div>
+    </div>
+
+    <script>
+        function openTelegramBot(event, url) {
+            try {
+                if (typeof fbq === 'function') {
+                    fbq('track', 'CompleteRegistration');
+                }
+            } catch (e) {}
+
+            // توجيه مباشر ومضمون حتى داخل متصفحات التطبيقات
+            if (event) {
+                event.preventDefault();
+            }
+            setTimeout(function () {
+                window.location.href = url;
+            }, 120);
+            return false;
+        }
+
+        function copyBotLink(btn) {
+            const url = document.getElementById('botLink').href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const oldText = btn.textContent;
+                    btn.textContent = 'تم نسخ الرابط ✓';
+                    setTimeout(() => btn.textContent = oldText, 2000);
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
